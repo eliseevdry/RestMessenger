@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import ru.eliseev.springapp.RestMessenger.domain.dto.responses.ExceptionResponse;
+import ru.eliseev.springapp.RestMessenger.domain.exceptions.InvalidDataException;
 import ru.eliseev.springapp.RestMessenger.domain.exceptions.UserNotFoundException;
 
 import java.util.HashMap;
@@ -22,6 +23,12 @@ public class ApplicationExceptionController extends ResponseEntityExceptionHandl
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler
     private ExceptionResponse handleNotFoundException(UserNotFoundException ex) {
+        return new ExceptionResponse(ex.getMessage(), System.currentTimeMillis());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler
+    private ExceptionResponse handleNotFoundException(InvalidDataException ex) {
         return new ExceptionResponse(ex.getMessage(), System.currentTimeMillis());
     }
 

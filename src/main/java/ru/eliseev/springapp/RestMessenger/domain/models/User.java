@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.eliseev.springapp.RestMessenger.domain.dto.requests.CreateUserRequest;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -28,4 +27,6 @@ public class User {
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+    @Column(name = "password")
+    private String password;
 }
